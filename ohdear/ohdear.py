@@ -30,6 +30,15 @@ class OhDear:
             raise OhDearException(response.json().get('error') or 'Unknown error')
         return response.json()
 
+    def authenticated(self) -> bool:
+        try:
+            return self.me().get('id') is not None
+        except UnauthorizedException:
+            return False
+
+    def me(self):
+        return self.get('/me')
+
 
 class Sites:
     def __init__(self, client: OhDear):
