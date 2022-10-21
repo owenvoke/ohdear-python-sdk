@@ -70,4 +70,4 @@ Read more about Treeware at [treeware.earth][link-treeware].
 [link-treeware]: https://treeware.earth
 [link-treeware-gifting]: https://ecologi.com/owenvoke?gift-trees
 [link-author]: https://github.com/owenvoke
-[link-contributors]: ../../contributors
+[link-contributors]: https://github.com/owenvoke/ohdear-python-sdk/contributors
