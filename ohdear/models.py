@@ -43,3 +43,23 @@ class Site(TypedDict):
 
 class SitesCollection(TypedDict):
     data: list[Site]
+
+
+class CronCheck(TypedDict):
+    id: int
+    uuid: str
+    name: str
+    type: str
+    description: str
+    frequency_in_minutes: str
+    grace_time_in_minutes: str
+    cron_expression: Optional[str]
+    server_timezone: str
+    ping_url: str
+    created_at: datetime
+    latest_result: str
+    latest_ping_at: Optional[datetime]
+
+
+class CronChecksCollection(TypedDict):
+    data: list[Site]

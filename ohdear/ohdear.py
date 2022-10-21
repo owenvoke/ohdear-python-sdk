@@ -1,6 +1,6 @@
 import requests
 from typing import cast
-from ohdear.models import UserInfo, SitesCollection, Site
+from ohdear.models import UserInfo, SitesCollection, Site, CronChecksCollection
 
 TIMEOUT = 3
 API_BASE_URI = 'https://ohdear.app/api'
@@ -28,6 +28,7 @@ class OhDear:
 
         self.sites: Sites = Sites(self)
         self.checks: Checks = Checks(self)
+        self.cron_checks: CronChecks = CronChecks(self)
 
     def authenticated(self) -> bool:
         try:
@@ -73,6 +74,14 @@ class Sites:
 
     def show(self, site_id: int) -> Site:
         return cast(Site, self.client.get(f'/sites/{site_id}'))
+
+
+class CronChecks:
+    def __init__(self, client: OhDear):
+        self.client = client
+
+    def show(self, site_id: int) -> CronChecksCollection:
+        return cast(CronChecksCollection, self.client.get(f'/sites/{site_id}/cron-checks'))
 
 
 class Checks:
