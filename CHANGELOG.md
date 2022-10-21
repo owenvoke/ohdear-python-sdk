@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## [v0.3.2 - 2022-10-21](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.1...v0.3.2)
+
+### Added
+- Add support for certificates
+
 ## [v0.3.1 - 2022-10-21](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.0...v0.3.1)
 
 ### Changed
