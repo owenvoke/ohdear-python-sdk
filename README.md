@@ -26,7 +26,7 @@ sites = ohdear.sites.all()
 ```
 
 | Available Methods               | Description                                                                                    |
-|---------------------------------|------------------------------------------------------------------------------------------------|
+|:--------------------------------|:-----------------------------------------------------------------------------------------------|
 | `ohdear.me()`                   | Retrieve a `UserInfo` dict with details about the currently authenticated user.                |
 | `ohdear.authenticated()`        | Retrieve a boolean response indicating whether the current user is authenticated.              |
 | `ohdear.broken_links.show(123)` | Retrieve a `BrokenLinksCollection` dict with details about broken links for a specific site.   |
