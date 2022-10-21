@@ -1,8 +1,6 @@
 from ohdear import OhDear
 import requests_mock
 
-from ohdear.models import Site
-
 ohdear = OhDear("abcdefghijklmnopqrstuvwxyz123457890")
 
 
