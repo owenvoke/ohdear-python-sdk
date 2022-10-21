@@ -5,7 +5,7 @@
 [![Build Status][ico-github-actions]][link-github-actions]
 [![Buy us a tree][ico-treeware-gifting]][link-treeware-gifting]
 
-An SDK to easily work with the Oh Dear API
+An SDK to easily work with the [Oh Dear API](https://ohdear.app/docs/integrations/the-oh-dear-api)
 
 ## Install
 
