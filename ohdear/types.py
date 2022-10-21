@@ -73,3 +73,21 @@ class BrokenLink(TypedDict):
 
 class BrokenLinksCollection(TypedDict):
     data: list[BrokenLink]
+
+
+class CertificateDetails(TypedDict):
+    issuer: str
+    valid_from: datetime
+    valid_until: datetime
+
+
+class CertificateCheck(TypedDict):
+    type: str
+    label: str
+    passed: bool
+
+
+class CertificateHealth(TypedDict):
+    certificate_details: CertificateDetails
+    certificate_checks: list[CertificateCheck]
+    certificate_chain_issuers: list[str]

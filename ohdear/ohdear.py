@@ -1,6 +1,6 @@
 import requests
 from typing import cast
-from ohdear.types import UserInfo, SitesCollection, Site, CronChecksCollection, BrokenLinksCollection
+from ohdear.types import UserInfo, SitesCollection, Site, CronChecksCollection, BrokenLinksCollection, CertificateHealth
 
 TIMEOUT = 3
 API_BASE_URI = 'https://ohdear.app/api'
@@ -27,6 +27,7 @@ class OhDear:
         }
 
         self.broken_links: BrokenLinks = BrokenLinks(self)
+        self.certificates: Certificates = Certificates(self)
         self.checks: Checks = Checks(self)
         self.cron_checks: CronChecks = CronChecks(self)
         self.sites: Sites = Sites(self)
@@ -72,6 +73,14 @@ class BrokenLinks:
 
     def show(self, site_id: int) -> BrokenLinksCollection:
         return cast(BrokenLinksCollection, self.client.get(f'/broken-links/{site_id}'))
+
+
+class Certificates:
+    def __init__(self, client: OhDear):
+        self.client = client
+
+    def show(self, site_id: int) -> CertificateHealth:
+        return cast(CertificateHealth, self.client.get(f'/certificate-health/{site_id}'))
 
 
 class Checks:

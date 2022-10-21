@@ -1,6 +1,5 @@
 import requests_mock
-
-from ohdear.ohdear import NotFoundException, OhDear
+from ohdear.ohdear import OhDear
 
 ohdear = OhDear("abcdefghijklmnopqrstuvwxyz123457890")
 

@@ -1,5 +1,4 @@
 import requests_mock
-
 from ohdear import OhDear
 
 ohdear = OhDear("abcdefghijklmnopqrstuvwxyz123457890")
