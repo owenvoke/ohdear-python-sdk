@@ -1,5 +1,7 @@
-from ohdear import OhDear
+import pytest
 import requests_mock
+from ohdear import OhDear
+from ohdear.ohdear import NotFoundException
 
 ohdear = OhDear("abcdefghijklmnopqrstuvwxyz123457890")
 
@@ -30,6 +32,42 @@ def test_me():
         assert me.get('photo_url') == 'https://example.org/profile-1.jpg'
         assert me.get('teams')[0].get('id') == 1
         assert me.get('teams')[0].get('name') == 'Dream Team'
+
+
+def test_authenticated():
+    with requests_mock.Mocker() as m:
+        m.get(
+            url='https://ohdear.app/api/me',
+            json={
+                "id": 1,
+                "name": "Owen Voke",
+                "email": "development@voke.dev",
+                "photo_url": "https://example.org/profile-1.jpg",
+                "teams": [
+                    {
+                        "id": 1,
+                        "name": "Dream Team"
+                    }
+                ]
+            }
+        )
+        me = ohdear.authenticated()
+
+        assert type(me) == bool
+        assert me is True
+
+
+def test_not_authenticated():
+    with requests_mock.Mocker() as m:
+        m.get(
+            url='https://ohdear.app/api/me',
+            status_code=401,
+            json={"error": "Unauthorized."}
+        )
+        me = ohdear.authenticated()
+
+        assert type(me) == bool
+        assert me is False
 
 
 def test_sites_all():
@@ -104,3 +142,16 @@ def test_sites_single():
 
         assert type(site) == dict
         assert type(site.get('id')) == int
+
+
+def test_sites_single_for_another_user():
+    with requests_mock.Mocker() as m:
+        m.get(
+            url='https://ohdear.app/api/sites/1',
+            status_code=404,
+            json={
+                "message": "No query results for model [no-model]."
+            }
+        )
+        with pytest.raises(NotFoundException):
+            assert ohdear.sites.show(1)
