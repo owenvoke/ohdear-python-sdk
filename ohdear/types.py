@@ -62,4 +62,14 @@ class CronCheck(TypedDict):
 
 
 class CronChecksCollection(TypedDict):
-    data: list[Site]
+    data: list[CronCheck]
+
+
+class BrokenLink(TypedDict):
+    crawled_url: str
+    status_code: int
+    found_on_url: str
+
+
+class BrokenLinksCollection(TypedDict):
+    data: list[BrokenLink]

@@ -1,6 +1,6 @@
 import requests
 from typing import cast
-from ohdear.models import UserInfo, SitesCollection, Site, CronChecksCollection
+from ohdear.types import UserInfo, SitesCollection, Site, CronChecksCollection, BrokenLinksCollection
 
 TIMEOUT = 3
 API_BASE_URI = 'https://ohdear.app/api'
@@ -26,9 +26,10 @@ class OhDear:
             'Authorization': 'Bearer {0}'.format(self.api_token)
         }
 
-        self.sites: Sites = Sites(self)
+        self.broken_links: BrokenLinks = BrokenLinks(self)
         self.checks: Checks = Checks(self)
         self.cron_checks: CronChecks = CronChecks(self)
+        self.sites: Sites = Sites(self)
 
     def authenticated(self) -> bool:
         try:
@@ -65,23 +66,12 @@ class OhDear:
         return response.json()
 
 
-class Sites:
+class BrokenLinks:
     def __init__(self, client: OhDear):
         self.client = client
 
-    def all(self) -> SitesCollection:
-        return cast(SitesCollection, self.client.get('/sites'))
-
-    def show(self, site_id: int) -> Site:
-        return cast(Site, self.client.get(f'/sites/{site_id}'))
-
-
-class CronChecks:
-    def __init__(self, client: OhDear):
-        self.client = client
-
-    def show(self, site_id: int) -> CronChecksCollection:
-        return cast(CronChecksCollection, self.client.get(f'/sites/{site_id}/cron-checks'))
+    def show(self, site_id: int) -> BrokenLinksCollection:
+        return cast(BrokenLinksCollection, self.client.get(f'/broken-links/{site_id}'))
 
 
 class Checks:
@@ -93,3 +83,22 @@ class Checks:
 
     def disable(self, check_id: int) -> bool:
         return self.client.post(f'/checks/{check_id}/disable').get('enabled')
+
+
+class CronChecks:
+    def __init__(self, client: OhDear):
+        self.client = client
+
+    def show(self, site_id: int) -> CronChecksCollection:
+        return cast(CronChecksCollection, self.client.get(f'/sites/{site_id}/cron-checks'))
+
+
+class Sites:
+    def __init__(self, client: OhDear):
+        self.client = client
+
+    def all(self) -> SitesCollection:
+        return cast(SitesCollection, self.client.get('/sites'))
+
+    def show(self, site_id: int) -> Site:
+        return cast(Site, self.client.get(f'/sites/{site_id}'))
