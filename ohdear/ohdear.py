@@ -27,16 +27,7 @@ class OhDear:
         }
 
         self.sites: Sites = Sites(self)
-
-    def get(self, url: str):
-        response = requests.get(self.base_uri + url, headers=self.headers)
-        if response.status_code == 401:
-            raise UnauthorizedException(response.json().get('error'))
-        if response.status_code == 404:
-            raise NotFoundException(response.json().get('error'))
-        if response.status_code >= 400:
-            raise OhDearException(response.json().get('error') or 'Unknown error')
-        return response.json()
+        self.checks: Checks = Checks(self)
 
     def authenticated(self) -> bool:
         try:
@@ -47,6 +38,31 @@ class OhDear:
     def me(self) -> UserInfo:
         return cast(UserInfo, self.get('/me'))
 
+    def get(self, url: str):
+        return self.__request('GET', url)
+
+    def post(self, url: str, data: dict = None):
+        return self.__request('POST', url, data)
+
+    def __request(self, method: str, url: str, params: dict = None):
+        if params is None:
+            params = {}
+
+        if method == 'GET':
+            response = requests.get(self.base_uri + url, params=params, headers=self.headers)
+        elif method == 'POST':
+            response = requests.post(self.base_uri + url, json=params, headers=self.headers)
+        else:
+            raise RuntimeError('Invalid request method provided')
+
+        if response.status_code == 401:
+            raise UnauthorizedException(response.json().get('error'))
+        if response.status_code == 404:
+            raise NotFoundException(response.json().get('error'))
+        if response.status_code >= 400:
+            raise OhDearException(response.json().get('error') or 'Unknown error')
+        return response.json()
+
 
 class Sites:
     def __init__(self, client: OhDear):
@@ -56,4 +72,15 @@ class Sites:
         return cast(SitesCollection, self.client.get('/sites'))
 
     def show(self, site_id: int) -> Site:
-        return cast(Site, self.client.get(f'/sites/{str(site_id)}'))
+        return cast(Site, self.client.get(f'/sites/{site_id}'))
+
+
+class Checks:
+    def __init__(self, client: OhDear):
+        self.client = client
+
+    def enable(self, check_id: int) -> bool:
+        return self.client.post(f'/checks/{check_id}/enable').get('enabled')
+
+    def disable(self, check_id: int) -> bool:
+        return self.client.post(f'/checks/{check_id}/disable').get('enabled')
