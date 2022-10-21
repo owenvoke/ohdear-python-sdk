@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## [v0.3.1 - 2022-10-21](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.0...v0.3.1)
+
+### Changed
+- Added long description for PyPi
+
 ## [v0.3.0 - 2022-10-21](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.2.0...v0.3.0)
 
 ### Added
