@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
     name='ohdear-sdk',
     packages=['ohdear'],
-    version='0.2.0',
+    version='0.3.0',
     install_requires=['requests'],
     description='Oh Dear Python SDK',
     author='Owen Voke',

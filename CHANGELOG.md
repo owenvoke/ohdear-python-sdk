@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## [v0.3.0 - 2022-10-21](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.2.0...v0.3.0)
+
+### Added
+- Add support for checks
+- Add support for cron checks
+- Add support for broken links
+
+### Changed
+- **BREAKING**: Moved types from `ohdear.models` to `ohdear.types`
+
 ## [v0.2.0 - 2022-10-21](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.1.1...v0.2.0)
 
 ### Added
