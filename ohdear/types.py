@@ -91,3 +91,13 @@ class CertificateHealth(TypedDict):
     certificate_details: CertificateDetails
     certificate_checks: list[CertificateCheck]
     certificate_chain_issuers: list[str]
+
+
+class MixedContent(TypedDict):
+    element_name: str
+    mixed_content_url: str
+    found_on_url: str
+
+
+class MixedContentsCollection(TypedDict):
+    data: list[MixedContent]

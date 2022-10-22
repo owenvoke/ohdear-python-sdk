@@ -1,6 +1,7 @@
 import requests
 from typing import cast
-from ohdear.types import UserInfo, SitesCollection, Site, CronChecksCollection, BrokenLinksCollection, CertificateHealth
+from ohdear.types import UserInfo, SitesCollection, Site, CronChecksCollection, BrokenLinksCollection, \
+    CertificateHealth, MixedContentsCollection
 
 TIMEOUT = 3
 API_BASE_URI = 'https://ohdear.app/api'
@@ -30,6 +31,7 @@ class OhDear:
         self.certificates: Certificates = Certificates(self)
         self.checks: Checks = Checks(self)
         self.cron_checks: CronChecks = CronChecks(self)
+        self.mixed_contents: MixedContents = MixedContents(self)
         self.sites: Sites = Sites(self)
 
     def authenticated(self) -> bool:
@@ -100,6 +102,14 @@ class CronChecks:
 
     def show(self, site_id: int) -> CronChecksCollection:
         return cast(CronChecksCollection, self.client.get(f'/sites/{site_id}/cron-checks'))
+
+
+class MixedContents:
+    def __init__(self, client: OhDear):
+        self.client = client
+
+    def show(self, site_id: int) -> MixedContentsCollection:
+        return cast(MixedContentsCollection, self.client.get(f'/mixed-content/{site_id}'))
 
 
 class Sites:
