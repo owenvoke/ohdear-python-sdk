@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## [v0.3.6 - 2022-11-06](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.5...v0.3.6)
+
+### Added
+- Export exceptions in package
+
 ## [v0.3.5 - 2022-11-06](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.4...v0.3.5)
 
 ### Added
