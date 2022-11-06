@@ -22,6 +22,7 @@ class Check(TypedDict):
     enabled: bool
     latest_run_ended_at: datetime
     latest_run_result: str
+    summary: str
 
 
 class Site(TypedDict):
