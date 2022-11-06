@@ -6,7 +6,7 @@ from pathlib import Path
 setup(
     name='ohdear-sdk',
     packages=['ohdear'],
-    version='0.3.3',
+    version='0.3.4',
     install_requires=['requests'],
     description='Oh Dear Python SDK',
     long_description=(Path(__file__).parent / "README.md").read_text(),
