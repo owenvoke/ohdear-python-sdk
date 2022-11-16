@@ -1,5 +1,6 @@
 import pytest
 import requests_mock
+
 from ohdear.ohdear import NotFoundException, OhDear
 
 ohdear = OhDear("abcdefghijklmnopqrstuvwxyz123457890")
@@ -8,7 +9,7 @@ ohdear = OhDear("abcdefghijklmnopqrstuvwxyz123457890")
 def test_sites_all():
     with requests_mock.Mocker() as m:
         m.get(
-            url='https://ohdear.app/api/sites',
+            url="https://ohdear.app/api/sites",
             json={
                 "data": [
                     {
@@ -30,25 +31,25 @@ def test_sites_all():
                                 "enabled": True,
                                 "latest_run_ended_at": "2019-09-16 07:29:02",
                                 "latest_run_result": "succeeded",
-                                "summary": "Up"
+                                "summary": "Up",
                             }
-                        ]
+                        ],
                     }
                 ]
-            }
+            },
         )
         all_sites = ohdear.sites.all()
 
         assert type(all_sites) == dict
-        assert type(all_sites.get('data')) == list
-        assert type(all_sites.get('data')[0]) == dict
-        assert type(all_sites.get('data')[0].get('id')) == int
+        assert type(all_sites.get("data")) == list
+        assert type(all_sites.get("data")[0]) == dict
+        assert type(all_sites.get("data")[0].get("id")) == int
 
 
 def test_sites_single():
     with requests_mock.Mocker() as m:
         m.get(
-            url='https://ohdear.app/api/sites/12345',
+            url="https://ohdear.app/api/sites/12345",
             json={
                 "id": 1,
                 "url": "https://yoursite.tld",
@@ -68,25 +69,23 @@ def test_sites_single():
                         "enabled": True,
                         "latest_run_ended_at": "2019-09-16 07:29:02",
                         "latest_run_result": "succeeded",
-                        "summary": "Up"
+                        "summary": "Up",
                     }
-                ]
-            }
+                ],
+            },
         )
         site = ohdear.sites.show(12345)
 
         assert type(site) == dict
-        assert type(site.get('id')) == int
+        assert type(site.get("id")) == int
 
 
 def test_sites_single_for_a_non_existent_site():
     with requests_mock.Mocker() as m:
         m.get(
-            url='https://ohdear.app/api/sites/1',
+            url="https://ohdear.app/api/sites/1",
             status_code=404,
-            json={
-                "message": "No query results for model [no-model]."
-            }
+            json={"message": "No query results for model [no-model]."},
         )
         with pytest.raises(NotFoundException):
             assert ohdear.sites.show(1)

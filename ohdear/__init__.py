@@ -1,2 +1,2 @@
-from .ohdear import OhDear, OhDearException, NotFoundException, UnauthorizedException
+from .ohdear import NotFoundException, OhDear, OhDearException, UnauthorizedException
 from .types import *

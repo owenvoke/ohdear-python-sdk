@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import TypedDict, Optional
+from typing import Optional, TypedDict
 
 
 class Team(TypedDict):

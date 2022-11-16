@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling>=1.8.0", "hatch-vcs", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ohdear-sdk"
+dynamic = ["version"]
+readme = "README.md"
+license = "MIT"
+description = "Oh Dear Python SDK"
+authors = [
+    { name = "Owen Voke", email = "development@voke.dev" }
+]
+keywords = ["ohdear", "sdk"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3 :: Only",
+]
+requires-python = ">=3.9.0"
+dependencies = [
+    "requests>=2.28.1"
+]
+
+[project.urls]
+"Source Code" = "https://github.com/owenvoke/ohdear-python-sdk"
+"Issues" = "https://github.com/owenvoke/ohdear-python-sdk/issues"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "/.github",
+    "/docs",
+    "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["ohdear"]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "black",
+    "mypy",
+    "pytest==7.1",
+    "requests-mock==1.10",
+    "types-requests",
+]
+
+[tool.hatch.envs.default.scripts]
+test = [
+    "black --check --diff .",
+    "mypy ohdear",
+    "pytest",
+]
+lint = [
+    "black ."
+]
+
+[tool.black]
+target-version = ["py39", "py310"]
