@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## [v0.3.8 - 2022-11-18](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.7...v0.3.8)
+
+### Added
+- Enforce types with `py.typed` file ([#3](https://github.com/owenvoke/ohdear-python-sdk/pull/3))
+
 ## [v0.3.7 - 2022-11-16](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.6...v0.3.7)
 
 ### Added
