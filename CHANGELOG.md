@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and this 
 
 ## Unreleased
 
+## [v0.3.9 - 2023-04-18](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.8...v0.3.9)
+
+### Added
+- Add support for domain monitoring ([#4](https://github.com/owenvoke/ohdear-python-sdk/pull/4))
+
 ## [v0.3.8 - 2022-11-18](https://github.com/owenvoke/ohdear-python-sdk/compare/v0.3.7...v0.3.8)
 
 ### Added
