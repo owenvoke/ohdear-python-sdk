@@ -6,6 +6,7 @@ from ohdear.types import (
     BrokenLinksCollection,
     CertificateHealth,
     CronChecksCollection,
+    Domain,
     MixedContentsCollection,
     Site,
     SitesCollection,
@@ -38,6 +39,7 @@ class OhDear:
         self.certificates: Certificates = Certificates(self)
         self.checks: Checks = Checks(self)
         self.cron_checks: CronChecks = CronChecks(self)
+        self.domain_monitoring: DomainMonitoring = DomainMonitoring(self)
         self.mixed_contents: MixedContents = MixedContents(self)
         self.sites: Sites = Sites(self)
 
@@ -119,6 +121,14 @@ class CronChecks:
         return cast(
             CronChecksCollection, self.client.get(f"/sites/{site_id}/cron-checks")
         )
+
+
+class DomainMonitoring:
+    def __init__(self, client: OhDear):
+        self.client = client
+
+    def domain(self, site_id: int) -> Domain:
+        return cast(Domain, self.client.get(f"/sites/{site_id}/domain"))
 
 
 class MixedContents:

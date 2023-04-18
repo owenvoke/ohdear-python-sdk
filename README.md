@@ -25,18 +25,19 @@ ohdear = OhDear(api_token="your-token")
 sites = ohdear.sites.all()
 ```
 
-| Available Methods                 | Description                                                                                         |
-|:----------------------------------|:----------------------------------------------------------------------------------------------------|
-| `ohdear.me()`                     | Retrieve a `UserInfo` dict with details about the currently authenticated user.                     |
-| `ohdear.authenticated()`          | Retrieve a `boolean` response indicating whether the current user is authenticated.                 |
-| `ohdear.broken_links.show(123)`   | Retrieve a `BrokenLinksCollection` dict with details about broken links for a specific site.        |
-| `ohdear.certificates.enable(123)` | Retrieve a `CertificateHealth` dict containing details about the certificate and it's health.       |
-| `ohdear.checks.enable(123)`       | Retrieve a `boolean` indicating whether a check was enabled successfully.                           |
-| `ohdear.checks.disable(123)`      | Retrieve a `boolean` indicating whether a check was disabled successfully.                          |
-| `ohdear.cron_checks.show(123)`    | Retrieve a `CronChecksCollection` dict with details about the cron checks for a specific site.      |
-| `ohdear.mixed_contents.show(123)` | Retrieve a `MixedContentsCollection` dict with details about the mixed content for a specific site. |
-| `ohdear.sites.all()`              | Retrieve a `SitesCollection` dict with details about all sites.                                     |
-| `ohdear.sites.show(123)`          | Retrieve a `Site` dict with details about a specific site.                                          |
+| Available Methods                      | Description                                                                                         |
+|:---------------------------------------|:----------------------------------------------------------------------------------------------------|
+| `ohdear.me()`                          | Retrieve a `UserInfo` dict with details about the currently authenticated user.                     |
+| `ohdear.authenticated()`               | Retrieve a `boolean` response indicating whether the current user is authenticated.                 |
+| `ohdear.broken_links.show(123)`        | Retrieve a `BrokenLinksCollection` dict with details about broken links for a specific site.        |
+| `ohdear.certificates.enable(123)`      | Retrieve a `CertificateHealth` dict containing details about the certificate and it's health.       |
+| `ohdear.checks.enable(123)`            | Retrieve a `boolean` indicating whether a check was enabled successfully.                           |
+| `ohdear.checks.disable(123)`           | Retrieve a `boolean` indicating whether a check was disabled successfully.                          |
+| `ohdear.cron_checks.show(123)`         | Retrieve a `CronChecksCollection` dict with details about the cron checks for a specific site.      |
+| `ohdear.domain_monitoring.domain(123)` | Retrieve a `Domain` dict with details about the domain for a specific site.                         |
+| `ohdear.mixed_contents.show(123)`      | Retrieve a `MixedContentsCollection` dict with details about the mixed content for a specific site. |
+| `ohdear.sites.all()`                   | Retrieve a `SitesCollection` dict with details about all sites.                                     |
+| `ohdear.sites.show(123)`               | Retrieve a `Site` dict with details about a specific site.                                          |
 
 ## Change log
 

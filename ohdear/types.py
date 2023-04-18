@@ -94,6 +94,16 @@ class CertificateHealth(TypedDict):
     certificate_chain_issuers: list[str]
 
 
+class Domain(TypedDict):
+    expires_at: datetime
+    registered_at: datetime
+    last_changed_at: datetime
+    last_updated_in_rdap_db_at: datetime
+    domain_statuses: dict[str, bool]
+    rdap_domain_response: dict
+    created_at: datetime
+
+
 class MixedContent(TypedDict):
     element_name: str
     mixed_content_url: str
