@@ -13,7 +13,8 @@ from ohdear.types import (
     UserInfo,
 )
 
-TIMEOUT = 3
+# Seconds to wait for a connection, and between bytes of the response
+TIMEOUT = 10
 API_BASE_URI = "https://ohdear.app/api"
 
 
@@ -30,9 +31,12 @@ class NotFoundException(OhDearException):
 
 
 class OhDear:
-    def __init__(self, api_token: str, base_uri: str = API_BASE_URI) -> None:
+    def __init__(
+        self, api_token: str, base_uri: str = API_BASE_URI, timeout: float = TIMEOUT
+    ) -> None:
         self.api_token: str = api_token
         self.base_uri: str = base_uri
+        self.timeout: float = timeout
         self.headers: dict = {"Authorization": "Bearer {0}".format(self.api_token)}
 
         self.broken_links: BrokenLinks = BrokenLinks(self)
@@ -66,11 +70,17 @@ class OhDear:
 
         if method == "GET":
             response = requests.get(
-                self.base_uri + url, params=params, headers=self.headers
+                self.base_uri + url,
+                params=params,
+                headers=self.headers,
+                timeout=self.timeout,
             )
         elif method == "POST":
             response = requests.post(
-                self.base_uri + url, json=params, headers=self.headers
+                self.base_uri + url,
+                json=params,
+                headers=self.headers,
+                timeout=self.timeout,
             )
         else:
             raise RuntimeError("Invalid request method provided")

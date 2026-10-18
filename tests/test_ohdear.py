@@ -57,3 +57,14 @@ def test_not_authenticated():
 
         assert type(me) == bool
         assert me is False
+
+
+def test_requests_time_out():
+    with requests_mock.Mocker() as m:
+        m.get(url="https://ohdear.app/api/me", json={"id": 1})
+
+        ohdear.me()
+        assert m.last_request.timeout == 10
+
+        OhDear("token", timeout=2.5).me()
+        assert m.last_request.timeout == 2.5
