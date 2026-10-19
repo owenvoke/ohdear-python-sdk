@@ -1,36 +1,52 @@
 name: Tests
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  tests:
-    name: Tests
-
+  style:
     runs-on: ubuntu-latest
-
-    env:
-      FORCE_COLOR: '1'
-
+    name: Check style formatting
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: '3.10'
+          python-version: '3.x'
 
-      - name: Install Pip dependencies
-        run: pipx install hatch
+      - name: Install Hatch
+        run: python3 -m pip install hatch
 
-      - name: Run Tests
+      # Runs the Ruff version pinned in pyproject.toml, annotating PRs inline.
+      - name: Style Check
+        run: hatch run lint
+        env:
+          RUFF_OUTPUT_FORMAT: github
+
+  tests:
+    runs-on: ubuntu-latest
+    name: Tests
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+
+      - name: Install Hatch
+        run: python3 -m pip install hatch
+
+      - name: Run tests
         run: hatch run test
-
-      - name: Build package archive
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-        run: hatch build
-
-      - name: Publish to PyPi
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-        run: hatch publish --user '__token__' --auth '${{ secrets.PYPI_API_TOKEN }}'

@@ -1,4 +1,4 @@
-from typing import Optional, cast
+from typing import cast
 
 import requests
 
@@ -37,7 +37,7 @@ class OhDear:
         self.api_token: str = api_token
         self.base_uri: str = base_uri
         self.timeout: float = timeout
-        self.headers: dict = {"Authorization": "Bearer {0}".format(self.api_token)}
+        self.headers: dict = {"Authorization": f"Bearer {self.api_token}"}
 
         self.broken_links: BrokenLinks = BrokenLinks(self)
         self.certificates: Certificates = Certificates(self)
@@ -59,12 +59,12 @@ class OhDear:
     def get(self, url: str):
         return self.__request("GET", url)
 
-    def post(self, url: str, data: Optional[dict] = None):
+    def post(self, url: str, data: dict | None = None):
         if data is None:
             data = {}
         return self.__request("POST", url, data)
 
-    def __request(self, method: str, url: str, params: Optional[dict] = None):
+    def __request(self, method: str, url: str, params: dict | None = None):
         if params is None:
             params = {}
 

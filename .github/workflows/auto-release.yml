@@ -1,0 +1,16 @@
+name: Auto-Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: auto-release
+  cancel-in-progress: true
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    uses: owenvoke/semantic-release-config/.github/workflows/release.yml@f7423f9436c60a35f74e54dedfa5f80f848a5a10 # v1.3.0

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional, TypedDict
+from typing import TypedDict
 
 
 class Team(TypedDict):
@@ -29,17 +29,17 @@ class Site(TypedDict):
     id: int
     url: str
     sort_url: str
-    friendly_name: Optional[str]
+    friendly_name: str | None
     label: str
     team_id: int
-    latest_run_date: Optional[datetime]
+    latest_run_date: datetime | None
     summarized_check_result: str
-    uses_https: Optional[bool]
+    uses_https: bool | None
     checks: list[Check]
-    broken_links_check_include_external_links: Optional[bool]
-    broken_links_whitelisted_urls: Optional[list[str]]
-    created_at: Optional[datetime]
-    update_at: Optional[datetime]
+    broken_links_check_include_external_links: bool | None
+    broken_links_whitelisted_urls: list[str] | None
+    created_at: datetime | None
+    update_at: datetime | None
 
 
 class SitesCollection(TypedDict):
@@ -54,12 +54,12 @@ class CronCheck(TypedDict):
     description: str
     frequency_in_minutes: str
     grace_time_in_minutes: str
-    cron_expression: Optional[str]
+    cron_expression: str | None
     server_timezone: str
     ping_url: str
     created_at: datetime
     latest_result: str
-    latest_ping_at: Optional[datetime]
+    latest_ping_at: datetime | None
 
 
 class CronChecksCollection(TypedDict):
